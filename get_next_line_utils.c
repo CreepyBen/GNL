@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/16 16:54:10 by ben               #+#    #+#             */
-/*   Updated: 2026/10/16 17:22:36 by ben              ###   ########.fr       */
+/*   Updated: 2026/10/18 14:27:39 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ int	str_len(char *s)
 
 int	str_index(const char *s, int c)
 {
-	int i;
+	int	i;
 
-	if(!s)
+	if (!s)
 		return (-1);
 	i = 0;
-	while(s[i] != '\0')
+	while (s[i] != '\0')
 	{
-		if(s[i] == (char)c)
+		if (s[i] == (char)c)
 			return (i);
 		i++;
 	}
@@ -90,4 +90,29 @@ char	*extract(const char *s, unsigned int start, size_t len)
 	}
 	sub[i] = '\0';
 	return (sub);
+}
+
+char	*copy_line(char *str, char *stash, int pos)
+{
+	int	i;
+
+	i = 0;
+	if (pos == -1)
+	{
+		while (i < str_len(stash))
+		{
+			str[i] = stash[i];
+			i++;
+		}
+	}
+	else
+	{
+		while (i <= pos)
+		{
+			str[i] = stash[i];
+			i++;
+		}
+	}
+	str[i] = '\0';
+	return (str);
 }

@@ -6,12 +6,12 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 13:43:18 by ben               #+#    #+#             */
-/*   Updated: 2026/10/16 20:52:07 by ben              ###   ########.fr       */
+/*   Updated: 2026/10/18 14:56:46 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef get_next_line_h
-# define get_next_line_h
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -25,5 +25,10 @@ char	*get_next_line(int fd);
 int		str_index(const char *s, int c);
 char	*str_join(char *s1, char *s2);
 char	*extract(const char *s, unsigned int start, size_t len);
+char	*copy_line(char *str, char *stash, int pos);
+char	*append(char *stash, char *buf);
+char	*fill_stash(int fd, char *stash);
+char	*extract_line(char *stash);
+char	*update_stash(char *stash);
 
 #endif
