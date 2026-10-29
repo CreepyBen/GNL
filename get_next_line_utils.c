@@ -6,13 +6,13 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/16 16:54:10 by ben               #+#    #+#             */
-/*   Updated: 2026/10/18 14:27:39 by ben              ###   ########.fr       */
+/*   Updated: 2026/10/18 16:39:05 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	str_len(char *s)
+int	str_len(const char *s)
 {
 	int	i;
 
@@ -95,11 +95,13 @@ char	*extract(const char *s, unsigned int start, size_t len)
 char	*copy_line(char *str, char *stash, int pos)
 {
 	int	i;
+	int	len;
 
 	i = 0;
+	len = str_len(stash);
 	if (pos == -1)
 	{
-		while (i < str_len(stash))
+		while (i < len)
 		{
 			str[i] = stash[i];
 			i++;

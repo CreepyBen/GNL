@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 13:43:18 by ben               #+#    #+#             */
-/*   Updated: 2026/10/18 14:56:46 by ben              ###   ########.fr       */
+/*   Updated: 2026/10/18 15:39:27 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-int		str_len(char *s);
+int		str_len(const char *s);
 char	*get_next_line(int fd);
 int		str_index(const char *s, int c);
 char	*str_join(char *s1, char *s2);

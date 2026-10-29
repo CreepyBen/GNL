@@ -6,7 +6,7 @@
 /*   By: ben <ben@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/23 16:13:32 by ben               #+#    #+#             */
-/*   Updated: 2026/10/18 15:11:47 by ben              ###   ########.fr       */
+/*   Updated: 2026/10/18 16:38:56 by ben              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ char	*fill_stash(int fd, char *stash)
 {
 	char	*buf;
 	int		bytes_read;
-	char	*temp;
 
 	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
@@ -37,6 +36,7 @@ char	*fill_stash(int fd, char *stash)
 		if (bytes_read == -1)
 		{
 			free(buf);
+			free(stash);
 			return (NULL);
 		}
 		buf[bytes_read] = '\0';
@@ -48,7 +48,6 @@ char	*fill_stash(int fd, char *stash)
 
 char	*extract_line(char *stash)
 {
-	int		i;
 	int		pos;
 	char	*str;
 
@@ -72,11 +71,10 @@ char	*update_stash(char *stash)
 
 	pos = str_index(stash, '\n');
 	if (pos == -1)
-	{
-		free(stash);
 		return (NULL);
-	}
 	str = malloc(str_len(stash) - pos);
+	if (!str)
+		return (NULL);
 	i = 0;
 	pos++;
 	while (pos < str_len(stash))
@@ -93,7 +91,7 @@ char	*get_next_line(int fd)
 {
 	static char	*stash;
 	char		*line;
-	char *temp;
+	char		*temp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -101,6 +99,12 @@ char	*get_next_line(int fd)
 	if (!stash)
 		return (NULL);
 	line = extract_line(stash);
+	if (!line)
+	{
+		free(stash);
+		stash = NULL;
+		return (NULL);
+	}
 	temp = update_stash(stash);
 	free(stash);
 	stash = temp;
